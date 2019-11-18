@@ -5,7 +5,7 @@ ActiveAdmin.register Movie do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :descriptation, :igdb_rating, genre_ids: []
+  permit_params :title, :description, :imdb_rating, :cover, :bg_cover, genre_ids: []
   #
   # or
   #
@@ -14,13 +14,17 @@ ActiveAdmin.register Movie do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+   
+
+ 
+
 
   index do
     
-    id_column  
+     
     column :title
-    column :descriptation
-    column :igdb_rating
+    column :description
+    column :imdb_rating
     column :genres do |movie|
       movie.genres.map do |g|
         g.name
@@ -31,17 +35,19 @@ ActiveAdmin.register Movie do
 
   filter :title
   # filter :descriptation
-  filter :igdb_rating
+  filter :imdb_rating
   # filter :created_at
 
   form do |f|
     f.inputs do
     f.input :title
-    f.input :descriptation
-    f.input :igdb_rating
+    f.input :description
+    f.input :imdb_rating
     f.inputs 'Genres' do
       f.input :genres
     end
+    f.input :cover, as: :file
+    f.input :bg_cover, as: :file
     end
     f.actions
   end
@@ -50,14 +56,20 @@ ActiveAdmin.register Movie do
     show do
     attributes_table do
       row :title
-      row :descriptation
-      row :igdb_rating
+      row :description
+      row :imdb_rating
       row :created_at
       row :updated_at
       row :genres do |movie|
         movie.genres.map do |g|
           g.name
         end 
+      end
+      row :cover do |movie|
+        image_tag(movie.cover, height: 150)
+      end
+      row :bg_cover do |movie|
+        image_tag(movie.bg_cover, width: 500, height: 100 )
       end
     end
     active_admin_comments
