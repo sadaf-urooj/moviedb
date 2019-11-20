@@ -20,17 +20,30 @@
             <% if (movie.imdb_rating - movie.imdb_rating.to_i ) >= 0.5 %>
               <i class="fas fa-star-half-alt text-warning"></i>
             <% end %>
-            <div>
-                <%= link_to like_movie_path(movie), class:"like-btn btn btn-primary btn-sm px-3 ", method: :put do %>         
-                <span><i class="far fa-thumbs-up"></i></span>
-                <span><%= movie.get_upvotes.size %></span>                            
-              <% end %> 
 
-              <%= link_to dislike_movie_path(movie), class:"like-btn btn btn-primary btn-sm px-3 ", method: :put do %>          
+             <% if movie.up_vote_for?(current_user) %>
+              <%= link_to movie_vote_path(movie, movie.votes.up.find_by(user_id: current_user.id)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete, remote: true do %>        
+                <span><i class="far fa-thumbs-up"></i></span>
+                <span><%= movie.votes.up.size %></span>                           
+              <% end %> 
+              <% else %>
+              <%= link_to movie_votes_path(movie, status: :up), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post, remote: true do %>        
+                <span><i class="far fa-thumbs-up"></i></span>
+                <span><%= movie.votes.up.size %></span>                           
+              <% end %> 
+              <% end %>
+
+              <% if movie.down_vote_for?(current_user) %>
+            <%= link_to movie_vote_path(movie, movie.votes.down.find_by(user_id: current_user.id)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete, remote: true do %>        
                 <span><i class="far fa-thumbs-down"></i></span>
-                <span><%= movie.get_downvotes.size %></span>                          
-              <% end %>               
-            </div>
+                <span><%= movie.votes.down.size %></span>                           
+              <% end %> 
+              <% else %>
+              <%= link_to movie_votes_path(movie, status: :down), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post, remote: true do %>        
+                <span><i class="far fa-thumbs-down"></i></span>
+                <span><%= movie.votes.down.size %></span>                           
+              <% end %> 
+              <% end %>           
         </div>
       </div>
     </div>
@@ -40,6 +53,7 @@
 
 
 
+ 
 
 
-    
+ <!-- % if movie.up_vote_for?(current_user)  #movie.votes.down.where(user_id: current_user.id).present? %> -->

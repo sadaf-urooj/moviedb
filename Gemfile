@@ -40,8 +40,8 @@ gem 'jquery-rails'
 gem 'activeadmin', '~> 2.4'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 
-gem 'mini_magick'
-gem 'acts_as_votable', '~> 0.12.1'
+
+
 
 
 group :development, :test do

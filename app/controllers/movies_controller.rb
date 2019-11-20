@@ -17,18 +17,6 @@ def show
 end 
 
 
-  def upvote
-    @movie = Movie.find(params[:id])
-    @movie.upvote_from current_user
-
-     redirect_back(fallback_location: root_path)
-  end
-
-
-  def downvote
-    @movie = Movie.find(params[:id])
-    @movie.downvote_from current_user
-    
-    redirect_back(fallback_location: root_path)
-  end 
+  
+  
 end
