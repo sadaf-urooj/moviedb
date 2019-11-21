@@ -49,7 +49,14 @@
     </div>
   <% end %>
 </div>
-
+<!-- -------------------- pagination--------------------- -->
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-3 offset-4">
+      <%= will_paginate @movies, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div> 
+</div>
 
 
 

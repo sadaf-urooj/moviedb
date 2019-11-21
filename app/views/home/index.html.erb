@@ -156,8 +156,16 @@
     </div>
   </div>
 
+  <!-- ----------- pagination--------------- -->
 
-
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-3 offset-4">
+      <%= will_paginate @all_movies, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div> 
+</div>
+      
 
 
    <!-- votes.up.where(user_id: current_user.id).present?

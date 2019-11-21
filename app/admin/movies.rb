@@ -72,7 +72,7 @@ ActiveAdmin.register Movie do
         image_tag(movie.bg_cover, width: 500, height: 100 )
       end
     end
-    active_admin_comments
+  
   end
 end 
 
