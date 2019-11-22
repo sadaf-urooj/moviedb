@@ -6,9 +6,9 @@ class MoviesController < ApplicationController
   def index
     if params[:genre_id]  
         @genre = Genre.find(params[:genre_id])
-        @movies = @genre.movies.paginate(:page => params[:page], per_page: 3)
+        @movies = @genre.movies.includes(:votes).all.paginate(:page => params[:page], per_page: 3)
     else 
-        @movies = Movie.paginate(:page => params[:page], per_page: 2)
+        @movies = Movie.includes(:votes).all.paginate(:page => params[:page], per_page: 2)
     end
   end
 
