@@ -128,24 +128,24 @@
               <% if movie.up_vote_for?(current_user) %>
                 <%= link_to movie_vote_path(movie, movie.up_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
                   <span><i class="far fa-thumbs-up"></i></span>
-                  <span><%= movie.votes.up.size %></span>
+                  <span><%= movie.votes.up.up_size %></span>
                 <% end %>
               <% else %>
                 <%= link_to movie_votes_path(movie, status: :up), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
                   <span><i class="far fa-thumbs-up"></i></span>
-                  <span><%= movie.votes.up.size %></span>
+                  <span><%= movie.votes.up.up_size %></span>
                   <% end %>
               <% end %>
 
               <% if movie.down_vote_for?(current_user) %>
                 <%= link_to movie_vote_path(movie, movie.down_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
                   <span><i class="far fa-thumbs-down"></i></span>
-                  <span><%= movie.votes.down.size %></span>
+                  <span><%= movie.votes.down.down_size %></span>
                 <% end %>
               <% else %>
                 <%= link_to movie_votes_path(movie, status: :down), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
                   <span><i class="far fa-thumbs-down"></i></span>
-                  <span><%= movie.votes.down.size %></span>
+                  <span><%= movie.votes.down.down_size %></span>
                 <% end %>
               <% end %>
             </div>

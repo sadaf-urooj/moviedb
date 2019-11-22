@@ -4,7 +4,7 @@ class Movie < ApplicationRecord
     has_one_attached :bg_cover
     has_one_attached :cover
 
-    has_many :votes
+    has_many :votes, :as => :votable
 
     scope :top_four, -> {order(imdb_rating: :desc).limit(4)}
 
