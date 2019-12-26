@@ -52,36 +52,140 @@
 
 
 
-<div class="container mt-5">
-  <div class="row">
-    <% @movies.each do |movie| %>
-      <div class="col-sm-3"><div class="card" style="width: 15rem;">
-        <div class="zoom">
-          <%= image_tag(movie.cover, alt: "img 3", width: "100%") %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= movie.title %></h5>
-          <p class="card-text"><%= movie.description %></p>
-
-          <% movie.imdb_rating.to_i.times do %>
-            <i class="fas fa-star text-warning"></i>
-          <% end %> 
-          <% if (movie.imdb_rating - movie.imdb_rating.to_i ) >= 0.5 %>
-              <i class="fas fa-star-half-alt text-warning"></i>
+  <div class="container mt-5">
+    <h1><u>Top Movies</u></h1>
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <div class="col-sm-3"><div class="card" style="width: 15rem;">
+           <%= link_to movie_path(movie) do %>
+          <div class="zoom">
+            <%= image_tag(movie.cover, alt: "img 3", width: "100%") %>
+          </div>
           <% end %>
-          <div>
-            <%= link_to like_movie_path(movie), class:"like-btn btn btn-primary btn-sm px-3 ", method: :put do %>            
-                <span><i class="far fa-thumbs-up"></i></span>
-                 <span><%= movie.get_upvotes.size %></span>                           
-              <% end %> 
+          <div class="card-body">
+            <h5 class="card-title"><%= movie.title %></h5>
+            <p class="card-text"><%= movie.description %></p>
 
-              <%= link_to dislike_movie_path(movie), class:"like-btn btn btn-primary btn-sm px-3 ", method: :put do %>          
-                <span><i class="far fa-thumbs-down"></i></span>
-                  <span><%= movie.get_downvotes.size %></span>                             
-              <% end %>            
+            <% movie.imdb_rating.to_i.times do %>
+              <i class="fas fa-star text-warning"></i>
+            <% end %>
+            <% if (movie.imdb_rating - movie.imdb_rating.to_i ) >= 0.5 %>
+              <i class="fas fa-star-half-alt text-warning"></i>
+            <% end %>
+            <div>
+              <% if movie.up_vote_for?(current_user) %>
+                <%= link_to movie_vote_path(movie, movie.up_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
+                  <span><i class="far fa-thumbs-up"></i></span>
+                  <span><%= movie.votes.up.size %></span>
+                <% end %>
+              <% else %>
+                <%= link_to movie_votes_path(movie, status: :up), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
+                  <span><i class="far fa-thumbs-up"></i></span>
+                  <span><%= movie.votes.up.size %></span>
+                  <% end %>
+              <% end %>
+
+              <% if movie.down_vote_for?(current_user) %>
+                <%= link_to movie_vote_path(movie, movie.down_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
+                  <span><i class="far fa-thumbs-down"></i></span>
+                  <span><%= movie.votes.down.size %></span>
+                <% end %>
+              <% else %>
+                <%= link_to movie_votes_path(movie, status: :down), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
+                  <span><i class="far fa-thumbs-down"></i></span>
+                  <span><%= movie.votes.down.size %></span>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+
+
+  <div class="container mt-3">
+    <h1><u>All Movies</u></h1>
+    <div class="row mt-5">
+      <% @all_movies.each do |movie| %>
+        <div class="col-sm-3"><div class="card" style="width: 15rem;">
+          <%= link_to movie_path(movie) do %>
+          <div class="zoom">
+            <%= image_tag(movie.cover, alt: "img 3", width: "100%") %>
+          </div>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= movie.title %></h5>
+            <p class="card-text"><%= movie.description %></p>
+
+            <% movie.imdb_rating.to_i.times do %>
+              <i class="fas fa-star text-warning"></i>
+            <% end %>
+            <% if (movie.imdb_rating - movie.imdb_rating.to_i ) >= 0.5 %>
+              <i class="fas fa-star-half-alt text-warning"></i>
+            <% end %>
+            <div>
+              <% if movie.up_vote_for?(current_user) %>
+                <%= link_to movie_vote_path(movie, movie.up_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
+                  <span><i class="far fa-thumbs-up"></i></span>
+                  <span><%= movie.votes.up.up_size %></span>
+                <% end %>
+              <% else %>
+                <%= link_to movie_votes_path(movie, status: :up), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
+                  <span><i class="far fa-thumbs-up"></i></span>
+                  <span><%= movie.votes.up.up_size %></span>
+                  <% end %>
+              <% end %>
+
+              <% if movie.down_vote_for?(current_user) %>
+                <%= link_to movie_vote_path(movie, movie.down_vote_for(current_user)), class:"like-btn btn btn-primary btn-sm px-3 ", method: :delete do %>
+                  <span><i class="far fa-thumbs-down"></i></span>
+                  <span><%= movie.votes.down.down_size %></span>
+                <% end %>
+              <% else %>
+                <%= link_to movie_votes_path(movie, status: :down), class:"like-btn btn btn-outline-primary btn-sm px-3 ", method: :post do %>
+                  <span><i class="far fa-thumbs-down"></i></span>
+                  <span><%= movie.votes.down.down_size %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- ----------- pagination--------------- -->
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-3 offset-4">
+      <%= will_paginate @all_movies, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div> 
 </div>
+      
+
+
+   <!-- votes.up.where(user_id: current_user.id).present?
+   votes.down.where(user_id: current_user.id).present? -->
+
+ <!-- vote find ku k is path me humy (/movies/:movie_id/votes/:id(.:format) id chye the  
+
+      votes.up.find_by(user_id: current_user.id -->
+
+      <!-- votes.down.find_by(user_id: current_user.id) -->
+
+
+<!-- if up_vote_for?(current_user)
+  danger
+else
+  primary
+end
+
+
+
+
+up_vote_for?(current_user) :danger : :primary -->

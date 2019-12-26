@@ -6,9 +6,9 @@ class MoviesController < ApplicationController
   def index
     if params[:genre_id]  
         @genre = Genre.find(params[:genre_id])
-        @movies = @genre.movies
+        @movies = @genre.movies.includes(:votes).all.paginate(:page => params[:page], per_page: 3)
     else 
-        @movies = Movie.all
+        @movies = Movie.includes(:votes).all.paginate(:page => params[:page], per_page: 2)
     end
   end
 
@@ -17,18 +17,6 @@ def show
 end 
 
 
-  def upvote
-    @movie = Movie.find(params[:id])
-    @movie.upvote_from current_user
-
-     redirect_back(fallback_location: root_path)
-  end
-
-
-  def downvote
-    @movie = Movie.find(params[:id])
-    @movie.downvote_from current_user
-    
-    redirect_back(fallback_location: root_path)
-  end 
+  
+  
 end

@@ -38,10 +38,15 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'jquery-rails'
 gem 'activeadmin', '~> 2.4'
-gem 'devise', '~> 4.7', '>= 4.7.1'
 
-gem 'mini_magick'
-gem 'acts_as_votable', '~> 0.12.1'
+gem 'will_paginate', '~> 3.2', '>= 3.2.1'
+
+gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'will_paginate-bootstrap4'
+
+
+
+
 
 
 group :development, :test do
