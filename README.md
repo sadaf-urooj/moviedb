@@ -1,24 +1,43 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## MovieDB
+ 
+[https://remote-work-demo.herokuapp.com/](git@github.com:sadaf-urooj/moviedb.git)
 
-Things you may want to cover:
+[Demo Video]()
 
-* Ruby version
+Movie-DB is a movie listing website where users can Sign-in and like or dislike the movies.
+Top rated movies shown on the home page.
 
-* System dependencies
+* Admin can add different movies based on genres from ActiveAdmin.
+* Admin can add rating, cover and background cover for a movie.
 
-* Configuration
+* User can see the list of top rated movies.
+* User can like or dislike the movies.
+* User can see movies based on genre.
+* User can see show page of a movie where all the related details available for that movie.
 
-* Database creation
 
-* Database initialization
+##### Requirements
 
-* How to run the test suite
+* Ruby 2.2.5
+* Rails 5.2.3
+* PostgreSQL
 
-* Services (job queues, cache servers, search engines, etc.)
+##### Setup and installation
+app can be configure by following these steps:
+1. Clone the repo `git@github.com:sadaf-urooj/RemoteWork.git`
+2. cd to into app directory
+3. Run `bundle`
+4. Run `rails db:create` 
+5. Run `rails db:migrate`
+6. Run `rails db:seed`
 
-* Deployment instructions
 
-* ...
+
+
+
+
+
+
+
+

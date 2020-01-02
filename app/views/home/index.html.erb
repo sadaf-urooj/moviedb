@@ -30,7 +30,6 @@
 
 
 
-
 <!-- ----------------Genre button----------------------- -->
 
 
@@ -46,10 +45,7 @@
 </div>
 
 
-
-
  <!-- ----------- cards--------------- -->
-
 
 
   <div class="container mt-5">
@@ -65,7 +61,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= movie.title %></h5>
             <p class="card-text"><%= movie.description %></p>
-
+            <!---------- Rating for movie------------->
             <% movie.imdb_rating.to_i.times do %>
               <i class="fas fa-star text-warning"></i>
             <% end %>
@@ -104,12 +100,12 @@
     </div>
   </div>
 
-
+<!--      Display all movies on home page-->
   <div class="container mt-3">
     <h1><u>All Movies</u></h1>
     <div class="row mt-5">
       <% @all_movies.each do |movie| %>
-        <div class="col-sm-3"><div class="card" style="width: 15rem;">
+        <div class="col-sm-3"><div class="card movie-card" style="width: 15rem;">
           <%= link_to movie_path(movie) do %>
           <div class="zoom">
             <%= image_tag(movie.cover, alt: "img 3", width: "100%") %>
@@ -166,26 +162,30 @@
     </div>
   </div> 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
 
-
-   <!-- votes.up.where(user_id: current_user.id).present?
-   votes.down.where(user_id: current_user.id).present? -->
-
- <!-- vote find ku k is path me humy (/movies/:movie_id/votes/:id(.:format) id chye the  
-
+<!--hints -->
+<!-- votes.up.where(user_id: current_user.id).present?
+votes.down.where(user_id: current_user.id).present? -->
+ <!-- vote find ku k is path me humy (/movies/:movie_id/votes/:id(.:format) id need the
       votes.up.find_by(user_id: current_user.id -->
-
-      <!-- votes.down.find_by(user_id: current_user.id) -->
-
-
+<!-- votes.down.find_by(user_id: current_user.id) -->
 <!-- if up_vote_for?(current_user)
-  danger
-else
-  primary
-end
 
 
-
-
-up_vote_for?(current_user) :danger : :primary -->
